@@ -1,0 +1,140 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+	<div id="container">
+		
+		<div class="nav_square">
+			<div class="dark_overlay"></div>
+			<a class="nav_square_link" href="">
+				<h2>Home</h2>
+				<img class="nav_square_img" src="assets/steak_frites.jpg" />
+			</a>
+		</div>
+
+		<div class="nav_square">
+			<div class="dark_overlay"></div>
+			<a class="nav_square_link" href="">
+				<h2>About</h2>
+				<img class="nav_square_img" src="assets/lost_brothers.jpg" />
+			</a>
+		</div>
+
+		<div class="nav_square">
+			<div class="dark_overlay"></div>
+			<a class="nav_square_link" href="">
+				<h2>Blog</h2>
+				<img class="nav_square_img" src="assets/stadium_selfie.jpg" />
+			</a>
+		</div>
+
+		<div class="nav_square">
+			<div class="dark_overlay"></div>
+			<a class="nav_square_link" href="">
+				<h2>Contact</h2>
+				<img class="nav_square_img" src="assets/stained_glass_flower.jpg" />
+			</a>
+		</div>
+
+		<div class="nav_square">
+			<div class="dark_overlay"></div>
+			<a class="nav_square_link" href="">
+				<h2>Resume</h2>
+				<img class="nav_square_img" src="assets/stained_glass_windows.jpg" />
+			</a>
+		</div>
+
+		<div class="nav_square">
+			<div class="dark_overlay"></div>
+			<a class="nav_square_link" href="">
+				<h2>Music</h2>
+				<img class="nav_square_img" src="assets/steak_frites.jpg" />
+			</a>
+		</div>
+
+		<div class="nav_square">
+			<div class="dark_overlay"></div>
+			<a class="nav_square_link" href="">
+				<h2>Volunteering</h2>
+				<img class="nav_square_img" src="assets/steak_frites.jpg" />
+			</a>
+		</div>
+
+		<div class="nav_square">
+			<div class="dark_overlay"></div>
+			<a class="nav_square_link" href="">
+				<h2>Interests</h2>
+				<img class="nav_square_img" src="assets/steak_frites.jpg" />
+			</a>
+		</div>
+
+		<div class="nav_square">
+			<div class="dark_overlay"></div>
+			<a class="nav_square_link" href="">
+				<h2>Social_Media</h2>
+				<img class="nav_square_img" src="assets/steak_frites.jpg" />
+			</a>
+		</div>
+		
+		<div class="clear"></div>
+
+		<style>
+			
+			.nav_square_link h2{
+				color: #ffffff;
+				position: absolute;
+			  top: 50%;
+			  left: 50%;
+			  transform: translate(-50%, -50%);
+			  z-index: 101;
+			}
+
+			.clear{
+				clear:both;	
+			}
+
+			a.nav_square_link{
+				display: block;
+				line-height: 0;
+			}
+
+			.nav_square:hover{
+				cursor: pointer;
+			}
+
+			.nav_square{
+				display: block;
+				float: left;
+				width: 33%;
+				z-index: 1;
+				position: relative;
+			}
+
+			.dark_overlay{
+				background: url("assets/black.png") repeat;
+				opacity: 1;
+				height: 100%;
+				width: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: 100;
+				transition: opacity .5s ease-in-out;
+			   -moz-transition: opacity .5s ease-in-out;
+			   -webkit-transition: opacity .5s ease-in-out;
+				/*align-items: stretch;*/
+			}
+
+			.dark_overlay:hover{			
+			   opacity: 0;
+			}
+
+			/** TODO: create breakpoints for mobile homepage, images should stack when width is too short **/
+
+		</style>
+
+	</div>
+	{{ page.content }}
+	
+{% endblock %}
+
+

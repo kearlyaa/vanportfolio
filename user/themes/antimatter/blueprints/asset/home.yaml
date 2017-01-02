@@ -1,0 +1,28 @@
+title: Homepage
+@extends: 
+    type: default
+    context: blueprints://pages 
+
+form:
+  fields:
+    tabs:
+      fields:
+        features:
+          type: tab
+          title: Homepage
+          fields:
+            header.features:
+              name: features
+              type: list
+              label: Homepage
+
+              fields:
+                .title:
+                  type: text
+                  label: Title
+                .subtitle:
+                  type: text
+                  label: Subtitle
+                .icon:              
+                  type: text
+                  label: Icon
