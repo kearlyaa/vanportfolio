@@ -109,26 +109,38 @@
 				position: relative;
 			}
 
-			.dark_overlay{
-				background: url("assets/black.png") repeat;
-				opacity: 1;
-				height: 100%;
-				width: 100%;
-				position: absolute;
-				top: 0;
-				left: 0;
-				z-index: 100;
-				transition: opacity .5s ease-in-out;
-			   -moz-transition: opacity .5s ease-in-out;
-			   -webkit-transition: opacity .5s ease-in-out;
-				/*align-items: stretch;*/
-			}
+			
 
-			.dark_overlay:hover{			
-			   opacity: 0;
-			}
 
 			/** TODO: create breakpoints for mobile homepage, images should stack when width is too short **/
+			@media (max-width:500px){
+		    .nav_square{
+		      width: 100%;
+				}
+			}
+
+			@media (min-width: 501px){
+				.dark_overlay{
+					background: url("assets/black.png") repeat;
+					opacity: 1;
+					height: 100%;
+					width: 100%;
+					position: absolute;
+					top: 0;
+					left: 0;
+					z-index: 100;
+					transition: opacity .5s ease-in-out;
+				   -moz-transition: opacity .5s ease-in-out;
+				   -webkit-transition: opacity .5s ease-in-out;
+					/*align-items: stretch;*/
+				}
+
+				
+				.dark_overlay:hover{			
+				   opacity: 0;
+				}
+			}
+
 
 		</style>
 

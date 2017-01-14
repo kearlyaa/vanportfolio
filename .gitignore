@@ -2,7 +2,7 @@
 .sass-cache
 composer.lock
 cache/*
-assets/*
+#assets/*
 logs/*
 #images/*
 user/data/*
