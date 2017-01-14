@@ -13,3 +13,9 @@
 #body > script:first-child + .grav-lightslider {
   margin-top: -3rem;
 }
+
+/* Limit #body width and center */
+#body{
+	margin: 0 auto;
+	max-width: 980px;
+}
