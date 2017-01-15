@@ -103,6 +103,8 @@
 
 			.nav_square{
 				display: block;
+				box-sizing: border-box;
+				margin: 1px;
 				float: left;
 				width: 33%;
 				z-index: 1;
@@ -113,13 +115,13 @@
 
 
 			/** TODO: create breakpoints for mobile homepage, images should stack when width is too short **/
-			@media (max-width:500px){
+			@media (max-width:630px){
 		    .nav_square{
 		      width: 100%;
 				}
 			}
 
-			@media (min-width: 501px){
+			@media (min-width: 630px){
 				.dark_overlay{
 					background: url("assets/black.png") repeat;
 					opacity: 1;
@@ -135,7 +137,7 @@
 					/*align-items: stretch;*/
 				}
 
-				
+
 				.dark_overlay:hover{			
 				   opacity: 0;
 				}
