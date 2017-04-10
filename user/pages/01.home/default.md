@@ -1,5 +1,6 @@
 ---
 title: Home
+visible: false
 template: home
 content:
     items: '@self.children'
@@ -10,5 +11,4 @@ content:
     pagination: '1'
     url_taxonomy_filters: '1'
 ---
-
 
