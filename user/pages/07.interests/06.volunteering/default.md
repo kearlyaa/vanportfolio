@@ -1,4 +1,5 @@
 ---
 title: Volunteering
+visible: true
 ---
 

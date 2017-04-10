@@ -1,5 +1,6 @@
 ---
 title: 'My Music'
+visible: true
 ---
 
 A place to showcase your musical talents.
