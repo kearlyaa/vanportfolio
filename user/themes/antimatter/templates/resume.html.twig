@@ -3,15 +3,30 @@
 {% block content %}
 	<div id="container">
 
-		Valve
-		Yesler
-		Cole Weber
-		at&t
-
-		<a href="#" data-featherlight="#valveLightbox">
-			<img src="assets/"
+		<a class="job_tile" href="#" data-featherlight="#valveLightbox">
+			<img  src="images/Valve.jpeg" />
 		</a>
-		<div id="valveLightbox">Valve Stuff here</div>
+
+		<a class="job_tile" href="#" data-featherlight="#yeslerLightbox">
+			<img  src="images/YeslerLogo-Stacked.jpg" />
+		</a>
+
+		<a class="job_tile" href="#" data-featherlight="#cole-weberLightbox">
+			<img  src="images/Cwunited_small.png" />
+		</a>
+
+		<a class="job_tile" href="#" data-featherlight="#attLightbox">
+			<img  src="images/att_logo_sharing.png" />
+		</a>
+
+		<a class="job_tile" href="#" data-featherlight="#amazonLightbox">
+			<img  src="images/Amazon.png" />
+		</a>
+
+		{# The above images can be added to the loop below if we fix the naming scheme or add a field for image filename #}
+		{% for job in page.find('/resume').children %}
+			<div class="company_responsibilities crazy" id="{{ job.folder }}Lightbox">{{ job.content }} </div>
+		{% endfor %}
 		
 		<div class="clear"></div>
 

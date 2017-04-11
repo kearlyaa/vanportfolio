@@ -3,6 +3,59 @@ a:hover{
 	cursor: pointer;
 }
 
+.clear{
+	clear: both;
+}
+
+#container{
+	max-width: 800px;
+	width: 95%;
+	margin: 0 auto;
+}
+
+/* Home Page */
+
+.nav_square_link h2{
+	color: #ffffff;
+	position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 101;
+}
+
+
+a.nav_square_link{
+	display: block;
+	line-height: 0;
+}
+
+.nav_square:hover{
+	cursor: pointer;
+}
+
+.nav_square{
+	display: block;
+	box-sizing: border-box;
+	margin: 1px;
+	float: left;
+	width: 33%;
+	z-index: 1;
+	position: relative;
+}
+
+/* Resume Page */
+
+.job_tile img{
+	max-width: 500px;
+	width: 45%;
+	padding: 1% 2%;
+	float: left;
+}
+
+.company_responsibilities{
+	display: none;
+}
 
 /* Footer */
 
