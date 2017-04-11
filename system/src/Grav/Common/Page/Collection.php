@@ -75,21 +75,6 @@ class Collection extends Iterator
     }
 
     /**
-     *
-     * Merge another collection with the current collection
-     *
-     * @param Collection $collection
-     * @return $this
-     */
-    public function merge(Collection $collection)
-    {
-        foreach($collection as $page) {
-            $this->addPage($page);
-        }
-        return $this;
-    }
-
-    /**
      * Set parameters to the Collection
      *
      * @param array $params
@@ -161,7 +146,7 @@ class Collection extends Iterator
      *
      * @param Page|string|null $key
      *
-     * @return $this
+     * @return $this|void
      * @throws \InvalidArgumentException
      */
     public function remove($key = null)

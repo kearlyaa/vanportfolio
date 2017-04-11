@@ -69,8 +69,7 @@ trait CompiledFile
 
                         // Compile cached file into bytecode cache
                         if (function_exists('opcache_invalidate')) {
-                            // Silence error if function exists, but is restricted.
-                            @opcache_invalidate($file->filename(), true);
+                            opcache_invalidate($file->filename(), true);
                         }
                     }
                 }

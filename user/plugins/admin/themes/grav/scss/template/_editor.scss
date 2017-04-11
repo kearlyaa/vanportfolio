@@ -18,14 +18,14 @@
         z-index: 1;
     }
     .CodeMirror-selected {
-        background: Highlight;
+        background: #ebf4ff;
     }
 
 }
 
 .grav-editor-fullscreen {
     position: fixed;
-    top: 4.2rem;
+    top: 0;
     left: 0;
     bottom: 0;
     right: 0;
@@ -38,7 +38,7 @@
     }
 
     .grav-editor-toolbar, .grav-editor-toolbar ul li:first-child a, .grav-editor-toolbar-flip ul li:last-child a {
-        border-radius: 0 !important;
+        border-radius: 0;
     }
 }
 
@@ -78,7 +78,7 @@
             cursor: pointer;
             background-color: transparent;
             border-radius: 0;
-            padding: 0.4rem;
+            padding: 0.4rem 0.8rem;
             margin-top: -1px;
             border: 1px solid transparent;
 

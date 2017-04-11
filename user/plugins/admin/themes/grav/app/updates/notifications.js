@@ -2,8 +2,6 @@ import $ from 'jquery';
 import { config } from 'grav-config';
 import request from '../utils/request';
 
-const canFetchNotifications = () => config.notifications;
-
 class Notifications {
 
     showNotificationInFeed(notification, index) {
@@ -30,7 +28,7 @@ class Notifications {
                 break;
         }
 
-        let hidden = '';
+        var hidden = '';
         if (index > 9) {
             hidden = ' hidden ';
         }
@@ -169,11 +167,8 @@ class Notifications {
 
     // Grav.default.Notifications.fetch()
     fetch({ locations = [], refresh = false } = {}) {
-        if (!canFetchNotifications()) {
-            return false;
-        }
+        var that = this;
 
-        let that = this;
         let feed = $('#notifications');
         let loader = feed.find('.widget-loader');
         let content = feed.find('.widget-content > ul');
@@ -182,13 +177,13 @@ class Notifications {
         loader.show();
         content.hide();
 
-        let processNotifications = function processNotifications(response) {
-            let notifications = response.notifications;
+        var processNotifications = function processNotifications(response) {
+            var notifications = response.notifications;
 
             $('#notifications').find('.widget-content > ul').empty();
 
             if (notifications) {
-                let index = 0;
+                var index = 0;
 
                 notifications.forEach(function(notification, i) {
                     notification.closeButton = `<a href="#" data-notification-action="hide-notification" data-notification-id="${notification.id}" class="close hide-notification"><i class="fa fa-close"></i></a>`;
@@ -239,7 +234,7 @@ class Notifications {
                         }
                     });
                 }).fail(function() {
-                    let widget = $('#notifications .widget-content');
+                    var widget = $('#notifications .widget-content');
                     widget
                         .find('.widget-loader')
                         .find('div').remove();
@@ -257,29 +252,27 @@ class Notifications {
     }
 }
 
-let notifications = new Notifications();
+var notifications = new Notifications();
 export default notifications;
 
-if (canFetchNotifications()) {
-    notifications.fetch();
+notifications.fetch();
 
-    $(document).on('click', '[data-notification-action="hide-notification"]', (event) => {
-        let notification_id = $(event.target).parents('.hide-notification').data('notification-id');
+$(document).on('click', '[data-notification-action="hide-notification"]', (event) => {
+    let notification_id = $(event.target).parents('.hide-notification').data('notification-id');
 
-        let url = `${config.base_url_relative}/notifications.json/task${config.param_sep}hideNotification/notification_id${config.param_sep}${notification_id}`;
+    let url = `${config.base_url_relative}/notifications.json/task${config.param_sep}hideNotification/notification_id${config.param_sep}${notification_id}`;
 
-        request(url, { method: 'post' }, () => {});
+    request(url, { method: 'post' }, () => {});
 
-        $(event.target).parents('.single-notification').hide();
-    });
+    $(event.target).parents('.single-notification').hide();
+});
 
-    $(document).on('click', '[data-notification-action="show-all-notifications"]', (event) => {
-        $('#notifications .show-all').hide();
-        $('#notifications .hidden').removeClass('hidden');
-    });
+$(document).on('click', '[data-notification-action="show-all-notifications"]', (event) => {
+    $('#notifications .show-all').hide();
+    $('#notifications .hidden').removeClass('hidden');
+});
 
-    $(document).on('click', '[data-refresh="notifications"]', (event) => {
-        event.preventDefault();
-        notifications.fetch({ locations: ['feed'], refresh: true });
-    });
-}
+$(document).on('click', '[data-refresh="notifications"]', (event) => {
+    event.preventDefault();
+    notifications.fetch({ locations: ['feed'], refresh: true });
+});

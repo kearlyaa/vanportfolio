@@ -8,7 +8,6 @@ module.exports = {
             'codemirror',
             'chartist',
             'selectize',
-            'rangetouch',
             'remodal',
             'toastr',
             'bootstrap',

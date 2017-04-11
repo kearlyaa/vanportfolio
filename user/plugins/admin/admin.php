@@ -2,6 +2,7 @@
 namespace Grav\Plugin;
 
 use Grav\Common\File\CompiledYamlFile;
+use Grav\Common\GPM\GPM;
 use Grav\Common\Grav;
 use Grav\Common\Inflector;
 use Grav\Common\Language\Language;
@@ -88,7 +89,6 @@ class AdminPlugin extends Plugin
                 'onShutdown'           => ['onShutdown', 1000],
                 'onFormProcessed'      => ['onFormProcessed', 0],
                 'onAdminDashboard'     => ['onAdminDashboard', 0],
-                'onAdminTools'         => ['onAdminTools', 0],
             ];
         }
 
@@ -390,14 +390,10 @@ class AdminPlugin extends Plugin
         $this->grav['page'] = function () use ($self) {
             $page = new Page;
 
-            $page->expires(0);
-
             // If the page cannot be found in other plugins, try looking in admin plugin itself.
             if (file_exists(__DIR__ . "/pages/admin/{$self->template}.md")) {
                 $page->init(new \SplFileInfo(__DIR__ . "/pages/admin/{$self->template}.md"));
                 $page->slug(basename($self->template));
-
-
 
                 return $page;
             }
@@ -513,6 +509,65 @@ class AdminPlugin extends Plugin
     }
 
     /**
+     * Handles getting GPM updates
+     */
+    public function onTaskGPM()
+    {
+        $task = 'GPM';
+        if (!$this->admin->authorize(['admin.maintenance', 'admin.super'])) {
+            $this->admin->json_response = [
+                'status'  => 'unauthorized',
+                'message' => $this->admin->translate('PLUGIN_ADMIN.INSUFFICIENT_PERMISSIONS_FOR_TASK') . ' ' . $task . '.'
+            ];
+
+            return false;
+        }
+
+        $action = $_POST['action']; // getUpdatable | getUpdatablePlugins | getUpdatableThemes | gravUpdates
+        $flush = isset($_POST['flush']) && $_POST['flush'] == true ? true : false;
+
+        if (isset($this->grav['session'])) {
+            $this->grav['session']->close();
+        }
+
+        try {
+            $gpm = new GPM($flush);
+
+            switch ($action) {
+                case 'getUpdates':
+                    $resources_updates = $gpm->getUpdatable();
+                    if ($gpm->grav != null) {
+                        $grav_updates = [
+                            "isUpdatable" => $gpm->grav->isUpdatable(),
+                            "assets"      => $gpm->grav->getAssets(),
+                            "version"     => GRAV_VERSION,
+                            "available"   => $gpm->grav->getVersion(),
+                            "date"        => $gpm->grav->getDate(),
+                            "isSymlink"   => $gpm->grav->isSymlink()
+                        ];
+
+                        echo json_encode([
+                            "status"  => "success",
+                            "payload" => [
+                                "resources" => $resources_updates,
+                                "grav"      => $grav_updates,
+                                "installed" => $gpm->countInstalled(),
+                                'flushed'   => $flush
+                            ]
+                        ]);
+                    } else {
+                        echo json_encode(["status" => "error", "message" => "Cannot connect to the GPM"]);
+                    }
+                    break;
+            }
+        } catch (\Exception $e) {
+            echo json_encode(["status" => "error", "message" => $e->getMessage()]);
+        }
+
+        exit;
+    }
+
+    /**
      * Get list of form field types specified in this plugin. Only special types needs to be listed.
      *
      * @return array
@@ -563,6 +618,7 @@ class AdminPlugin extends Plugin
             'onTwigTemplatePaths'        => ['onTwigTemplatePaths', 1000],
             'onTwigSiteVariables'        => ['onTwigSiteVariables', 1000],
             'onAssetsInitialized'        => ['onAssetsInitialized', 1000],
+            'onTask.GPM'                 => ['onTaskGPM', 0],
             'onAdminRegisterPermissions' => ['onAdminRegisterPermissions', 0],
             'onOutputGenerated'          => ['onOutputGenerated', 0],
         ]);
@@ -652,7 +708,7 @@ class AdminPlugin extends Plugin
             'DROP_FILES_HERE_TO_UPLOAD',
             'DELETE',
             'INSERT',
-            'VIEW',
+            'UNDO',
             'UNDO',
             'REDO',
             'HEADERS',
@@ -695,7 +751,7 @@ class AdminPlugin extends Plugin
 
         foreach ($strings as $string) {
             $separator = (end($strings) === $string) ? '' : ',';
-            $translations .= '"' . $string . '": "' . htmlspecialchars($this->admin->translate('PLUGIN_ADMIN.' . $string)) . '"' . $separator;
+            $translations .= '"' . $string . '": "' . $this->admin->translate('PLUGIN_ADMIN.' . $string) . '"' . $separator;
         }
 
         $translations .= '};';
@@ -728,17 +784,6 @@ class AdminPlugin extends Plugin
         }
 
         return false;
-    }
-
-    /**
-     * Provide the tools for the Tools page, currently only direct install
-     *
-     * @return Event
-     */
-    public function onAdminTools(Event $event)
-    {
-        $event['tools'] = array_merge($event['tools'], [$this->grav['language']->translate('PLUGIN_ADMIN.DIRECT_INSTALL')]);
-        return $event;
     }
 
     public function onAdminDashboard()

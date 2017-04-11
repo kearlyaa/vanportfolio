@@ -104,8 +104,7 @@ class TwigExtension extends \Twig_Extension
             new \Twig_simpleFunction('authorize', [$this, 'authorize']),
             new \Twig_SimpleFunction('debug', [$this, 'dump'], ['needs_context' => true, 'needs_environment' => true]),
             new \Twig_SimpleFunction('dump', [$this, 'dump'], ['needs_context' => true, 'needs_environment' => true]),
-            new \Twig_SimpleFunction('evaluate', [$this, 'evaluateStringFunc'], ['needs_context' => true, 'needs_environment' => true]),
-            new \Twig_SimpleFunction('evaluate_twig', [$this, 'evaluateTwigFunc'], ['needs_context' => true, 'needs_environment' => true]),
+            new \Twig_SimpleFunction('evaluate', [$this, 'evaluateFunc']),
             new \Twig_SimpleFunction('gist', [$this, 'gistFunc']),
             new \Twig_SimpleFunction('nonce_field', [$this, 'nonceFieldFunc']),
             new \Twig_simpleFunction('random_string', [$this, 'randomStringFunc']),
@@ -119,7 +118,6 @@ class TwigExtension extends \Twig_Extension
             new \Twig_SimpleFunction('get_cookie', [$this, 'getCookie']),
             new \Twig_SimpleFunction('redirect_me', [$this, 'redirectFunc']),
             new \Twig_SimpleFunction('range', [$this, 'rangeFunc']),
-            new \Twig_SimpleFunction('isajaxrequest', [$this, 'isAjaxFunc']),
         ];
     }
 
@@ -434,10 +432,9 @@ class TwigExtension extends \Twig_Extension
     /**
      * @param $string
      *
-     * @param bool $block  Block or Line processing
      * @return mixed|string
      */
-    public function markdownFilter($string, $block = true)
+    public function markdownFilter($string)
     {
         $page     = $this->grav['page'];
         $defaults = $this->config->get('system.pages.markdown');
@@ -449,12 +446,7 @@ class TwigExtension extends \Twig_Extension
             $parsedown = new Parsedown($page, $defaults);
         }
 
-        if ($block) {
-            $string = $parsedown->text($string);
-        } else {
-            $string = $parsedown->line($string);
-        }
-
+        $string = $parsedown->text($string);
 
         return $string;
     }
@@ -571,22 +563,15 @@ class TwigExtension extends \Twig_Extension
             $domain = true;
         }
 
-        if (Grav::instance()['uri']->isExternal($input)) {
-            return $input;
-        }
 
-        $input = ltrim((string)$input, '/');
-
-        if (Utils::contains((string)$input, '://')) {
+        if (strpos((string)$input, '://')) {
             /** @var UniformResourceLocator $locator */
             $locator = $this->grav['locator'];
 
-
-
             // Get relative path to the resource (or false if not found).
-            $resource = $locator->findResource($input, false);
+            $resource = $locator->findResource((string)$input, false);
         } else {
-            $resource = $input;
+            $resource = (string)$input;
         }
 
         /** @var Uri $uri */
@@ -596,50 +581,21 @@ class TwigExtension extends \Twig_Extension
     }
 
     /**
-     * This function will evaluate Twig $twig through the $environment, and return its results.
+     * Evaluate a string
      *
-     * @param \Twig_Environment $environment
-     * @param array $context
-     * @param string $twig
-     * @return mixed
-     */
-    public function evaluateTwigFunc( \Twig_Environment $environment, $context, $twig ) {
-        $loader = $environment->getLoader( );
-
-        $parsed = $this->parseString( $environment, $context, $twig );
-
-        $environment->setLoader( $loader );
-        return $parsed;
-    }
-
-    /**
-     * This function will evaluate a $string through the $environment, and return its results.
+     * @example {{ evaluate('grav.language.getLanguage') }}
      *
-     * @param \Twig_Environment $environment
-     * @param $context
-     * @param $string
-     * @return mixed
+     * @param  string $input String to be evaluated
+     *
+     * @return string           Returns the evaluated string
      */
-    public function evaluateStringFunc(\Twig_Environment $environment, $context, $string )
+    public function evaluateFunc($input)
     {
-        $parsed = $this->evaluateTwigFunc($environment, $context, "{{ $string }}");
-        return $parsed;
+        if (!$input) { //prevent an obscure Twig error if $input is not set
+            $input = '""';
+        }
+        return $this->grav['twig']->processString("{{ $input }}");
     }
-
-    /**
-     * Sets the parser for the environment to Twig_Loader_String, and parsed the string $string.
-     *
-     * @param \Twig_Environment $environment
-     * @param array $context
-     * @param string $string
-     * @return string
-     */
-    protected function parseString( \Twig_Environment $environment, $context, $string ) {
-        $environment->setLoader( new \Twig_Loader_String( ) );
-        return $environment->render( $string, $context );
-    }
-
-
 
     /**
      * Based on Twig_Extension_Debug / twig_var_dump
@@ -822,7 +778,7 @@ class TwigExtension extends \Twig_Extension
      */
     public function nonceFieldFunc($action, $nonceParamName = 'nonce')
     {
-        $string = '<input type="hidden" name="' . $nonceParamName . '" value="' . Utils::getNonce($action) . '" />';
+        $string = '<input type="hidden" id="' . $nonceParamName . '" name="' . $nonceParamName . '" value="' . Utils::getNonce($action) . '" />';
 
         return $string;
     }
@@ -892,18 +848,5 @@ class TwigExtension extends \Twig_Extension
     public function rangeFunc($start = 0, $end = 100, $step = 1)
     {
         return range($start, $end, $step);
-    }
-
-    /**
-     * Check if HTTP_X_REQUESTED_WITH has been set to xmlhttprequest,
-     * in which case we may unsafely assume ajax. Non critical use only.
-     *
-     * @return true if HTTP_X_REQUESTED_WITH exists and has been set to xmlhttprequest
-     */
-    public function isAjaxFunc()
-    {
-        return (
-            !empty($_SERVER['HTTP_X_REQUESTED_WITH'])
-            && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
     }
 }

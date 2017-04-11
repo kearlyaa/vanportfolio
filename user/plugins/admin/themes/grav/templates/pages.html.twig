@@ -53,9 +53,10 @@
     {% set warn = twig_vars['warn'] %}
     {% set uri = twig_vars['uri'] %}
 
-    {% if page.header.admin.children_display_order == 'collection' and page.header.content.order.by %}
-        {% set pcol = page.children().order(page.header.content.order.by, page.header.content.order.dir|default('asc')) %}
-        {{ dump(pcol) }}
+    {% if page.header.content.order.by %}
+        {% set pcol = page.children().order(page.header.content.order.by, page.header.content.order.dir) %}
+    {% elseif page.order_by %}
+        {% set pcol = page.children().order(page.order_by, page.order_dir) %}
     {% else %}
         {% set pcol = page.children() %}
     {% endif %}
@@ -66,14 +67,12 @@
                              (p.routable ? "PLUGIN_ADMIN.ROUTABLE"|tu ~ ' &bull; ' : "PLUGIN_ADMIN.NON_ROUTABLE"|tu ~ ' &bull; ') ~
                              (p.visible ? "PLUGIN_ADMIN.VISIBLE"|tu ~ ' &bull; ' : "PLUGIN_ADMIN.NON_VISIBLE"|tu ~ ' &bull; ') ~
                              (p.published ? "PLUGIN_ADMIN.PUBLISHED"|tu ~ ' &bull; ' : "PLUGIN_ADMIN.NON_PUBLISHED"|tu ~ ' &bull; ') %}
-        {#{% set page_route =  p.rawRoute|trim('/') %}#}
-        {#{% if p.language and p.language != admin_lang %}#}
-            {#{% set page_url = base_url_simple ~ '/' ~ p.language ~ '/' ~ admin_route ~ '/pages/' ~ page_route %}#}
-        {#{% else %}#}
-            {#{% set page_url = base_url ~ '/pages/' ~ page_route  %}#}
-        {#{% endif %}#}
-
-        {% set page_url = getPageUrl(p) %}
+        {% set page_route =  p.rawRoute|trim('/') %}
+        {% if p.language and p.language != admin_lang %}
+            {% set page_url = base_url_simple ~ '/' ~ p.language ~ '/' ~ admin_route ~ '/pages/' ~ page_route %}
+        {% else %}
+            {% set page_url = base_url ~ '/pages/' ~ page_route  %}
+        {% endif %}
 
         <li class="page-item" data-nav-id="{{ p.route }}">
             <div class="row">
@@ -201,7 +200,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="clear admin-pages">
+    <div class="clear">
     {% if mode == 'new' %}
         {% include 'partials/blueprints-new.html.twig' with { blueprints: admin.blueprints('pages/page'), data: context } %}
     {% elseif mode == 'edit' %}
@@ -325,7 +324,4 @@
             </div>
         </form>
     </div>
-
-    {% include 'partials/admin-pro-pages-addons.html.twig' ignore missing %}
-
 {% endblock %}

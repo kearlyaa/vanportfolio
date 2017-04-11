@@ -90,8 +90,6 @@ class Pages
      */
     static protected $home_route;
 
-    protected $pages_cache_id;
-
     /**
      * Constructor
      *
@@ -156,7 +154,7 @@ class Pages
     /**
      * Returns a list of all pages.
      *
-     * @return array|Page[]
+     * @return Page
      */
     public function instances()
     {
@@ -292,85 +290,35 @@ class Pages
     }
 
     /**
-     * Get a page ancestor.
-     *
-     * @param  string $route The relative URL of the page
-     * @param  string $path The relative path of the ancestor folder
-     *
-     * @return Page|null
-     */
-    public function ancestor($route, $path = null)
-    {
-        if (!is_null($path)) {
-
-            $page = $this->dispatch($route, true);
-
-            if ($page->path() == $path) {
-                return $page;
-            } elseif (!$page->parent()->root()) {
-                return $this->ancestor($page->parent()->route(), $path);
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * Get a page ancestor trait.
-     *
-     * @param  string $route The relative route of the page
-     * @param  string $field The field name of the ancestor to query for
-     *
-     * @return Page|null
-     */
-    public function inherited($route, $field = null)
-    {
-        if (!is_null($field)) {
-
-            $page = $this->dispatch($route, true);
-
-            $ancestorField = $page->parent()->value('header.' . $field);
-
-            if ($ancestorField != null) {
-                return $page->parent();
-            } elseif (!$page->parent()->root()) {
-                return $this->inherited($page->parent()->route(), $field);
-            }
-        }
-
-        return null;
-    }
-
-    /**
      * alias method to return find a page.
      *
-     * @param string $route The relative URL of the page
+     * @param string $url The relative URL of the page
      * @param bool   $all
      *
      * @return Page|null
      */
-    public function find($route, $all = false)
+    public function find($url, $all = false)
     {
-        return $this->dispatch($route, $all, false);
+        return $this->dispatch($url, $all, false);
     }
 
     /**
      * Dispatch URI to a page.
      *
-     * @param string $route The relative URL of the page
+     * @param string $url The relative URL of the page
      * @param bool $all
      *
      * @param bool $redirect
      * @return Page|null
      * @throws \Exception
      */
-    public function dispatch($route, $all = false, $redirect = true)
+    public function dispatch($url, $all = false, $redirect = true)
     {
         // Fetch page if there's a defined route to it.
-        $page = isset($this->routes[$route]) ? $this->get($this->routes[$route]) : null;
+        $page = isset($this->routes[$url]) ? $this->get($this->routes[$url]) : null;
         // Try without trailing slash
-        if (!$page && Utils::endsWith($route, '/')) {
-            $page = isset($this->routes[rtrim($route, '/')]) ? $this->get($this->routes[rtrim($route, '/')]) : null;
+        if (!$page && Utils::endsWith($url, '/')) {
+            $page = isset($this->routes[rtrim($url, '/')]) ? $this->get($this->routes[rtrim($url, '/')]) : null;
         }
 
         // Are we in the admin? this is important!
@@ -390,15 +338,14 @@ class Pages
                 $config = $this->grav['config'];
 
                 // See if route matches one in the site configuration
-                $route = $config->get("site.routes.{$route}");
+                $route = $config->get("site.routes.{$url}");
                 if ($route) {
                     $page = $this->dispatch($route, $all);
                 } else {
                     // Try Regex style redirects
-                    $uri = $this->grav['uri'];
-                    $source_url = $route;
-                    $extension = $uri->extension();
-                    if (isset($extension) && !Utils::endsWith($uri->url(), $extension)) {
+                    $source_url = $url;
+                    $extension = $this->grav['uri']->extension();
+                    if (isset($extension)) {
                         $source_url.= '.' . $extension;
                     }
 
@@ -817,19 +764,18 @@ class Pages
                     break;
                 case 'hash':
                     $hash = Folder::hashAllFiles($pages_dir);
-                    break;
                 default:
                     $hash = Folder::lastModifiedFile($pages_dir);
             }
 
-            $this->pages_cache_id = md5($pages_dir . $hash . $language->getActive() . $config->checksum());
+            $page_cache_id = md5($pages_dir . $hash . $language->getActive() . $config->checksum());
 
-            list($this->instances, $this->routes, $this->children, $taxonomy_map, $this->sort) = $cache->fetch($this->pages_cache_id);
+            list($this->instances, $this->routes, $this->children, $taxonomy_map, $this->sort) = $cache->fetch($page_cache_id);
             if (!$this->instances) {
                 $this->grav['debugger']->addMessage('Page cache missed, rebuilding pages..');
 
                 // recurse pages and cache result
-                $this->resetPages($pages_dir, $this->pages_cache_id);
+                $this->resetPages($pages_dir, $page_cache_id);
 
             } else {
                 // If pages was found in cache, set the taxonomy
@@ -846,8 +792,9 @@ class Pages
      * Accessible method to manually reset the pages cache
      *
      * @param $pages_dir
+     * @param $page_cache_id
      */
-    public function resetPages($pages_dir)
+    public function resetPages($pages_dir, $page_cache_id)
     {
         $this->recurse($pages_dir);
         $this->buildRoutes();
@@ -860,7 +807,7 @@ class Pages
             $taxonomy = $this->grav['taxonomy'];
 
             // save pages, routes, taxonomy, and sort to cache
-            $cache->save($this->pages_cache_id, [$this->instances, $this->routes, $this->children, $taxonomy->taxonomy(), $this->sort]);
+            $cache->save($page_cache_id, [$this->instances, $this->routes, $this->children, $taxonomy->taxonomy(), $this->sort]);
         }
     }
 
@@ -1131,9 +1078,7 @@ class Pages
                 case (is_string($header_query[0])):
                     $child_header = new Header((array)$child->header());
                     $header_value = $child_header->get($header_query[0]);
-                    if (is_array($header_value)) {
-                        $list[$key] = implode(',',$header_value);
-                    } elseif ($header_value) {
+                    if ($header_value) {
                         $list[$key] = $header_value;
                     } else {
                         $list[$key] = $header_default ?: $key;
@@ -1215,18 +1160,5 @@ class Pages
         }
 
         return $new;
-    }
-
-    /**
-     * Get the Pages cache ID
-     *
-     * this is particularly useful to know if pages have changed and you want
-     * to sync another cache with pages cache - works best in `onPagesInitialized()`
-     *
-     * @return mixed
-     */
-    public function getPagesCacheId()
-    {
-        return $this->pages_cache_id;
     }
 }

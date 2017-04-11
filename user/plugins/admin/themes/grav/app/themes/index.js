@@ -15,11 +15,6 @@ $(document).on('click', '[data-theme-action="remove-package"]', (event) => {
     packages.handleRemovingPackage('theme', event);
 });
 
-// Reinstall theme
-$(document).on('click', '[data-theme-action="reinstall-package"]', (event) => {
-    packages.handleReinstallPackage('theme', event);
-});
-
 $(document).on('click', '[data-theme-action="remove-dependency-package"]', (event) => {
     packages.handleRemovingDependency('theme', event);
 });

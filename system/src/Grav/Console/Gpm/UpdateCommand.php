@@ -53,11 +53,6 @@ class UpdateCommand extends ConsoleCommand
     protected $overwrite;
 
     /**
-     * @var Upgrader
-     */
-    protected $upgrader;
-
-    /**
      *
      */
     protected function configure()

@@ -1,5 +1,5 @@
 ---
-title: Updates
+title: Cache
 template: default
 
 access:

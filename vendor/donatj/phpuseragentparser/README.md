@@ -96,7 +96,7 @@ array(
 - BlackBerry Browser
 - Camino
 - Kindle / Silk
-- Firefox / IceWeasel / IceCat
+- Firefox / Iceweasel
 - Safari
 - Internet Explorer
 - IEMobile
@@ -105,12 +105,10 @@ array(
 - Midori
 - Vivaldi
 - TizenBrowser
-- SamsungBrowser
 - UC Browser
 - Lynx
 - Wget
 - Curl
-- Puffin
 
 
 

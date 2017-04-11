@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit1ae1f24a0195b90de4d5c22a1e5455dc
+class ComposerStaticInitc8652957a277dc1464025db6ba78b7f0
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -307,7 +307,6 @@ class ComposerStaticInit1ae1f24a0195b90de4d5c22a1e5455dc
         'Grav\\Common\\Errors\\BareHandler' => __DIR__ . '/../..' . '/system/src/Grav/Common/Errors/BareHandler.php',
         'Grav\\Common\\Errors\\Errors' => __DIR__ . '/../..' . '/system/src/Grav/Common/Errors/Errors.php',
         'Grav\\Common\\Errors\\SimplePageHandler' => __DIR__ . '/../..' . '/system/src/Grav/Common/Errors/SimplePageHandler.php',
-        'Grav\\Common\\Errors\\SystemFacade' => __DIR__ . '/../..' . '/system/src/Grav/Common/Errors/SystemFacade.php',
         'Grav\\Common\\File\\CompiledFile' => __DIR__ . '/../..' . '/system/src/Grav/Common/File/CompiledFile.php',
         'Grav\\Common\\File\\CompiledJsonFile' => __DIR__ . '/../..' . '/system/src/Grav/Common/File/CompiledJsonFile.php',
         'Grav\\Common\\File\\CompiledMarkdownFile' => __DIR__ . '/../..' . '/system/src/Grav/Common/File/CompiledMarkdownFile.php',
@@ -529,8 +528,6 @@ class ComposerStaticInit1ae1f24a0195b90de4d5c22a1e5455dc
         'MatthiasMullie\\Minify\\JS' => __DIR__ . '/..' . '/matthiasmullie/minify/src/JS.php',
         'MatthiasMullie\\Minify\\Minify' => __DIR__ . '/..' . '/matthiasmullie/minify/src/Minify.php',
         'MatthiasMullie\\PathConverter\\Converter' => __DIR__ . '/..' . '/matthiasmullie/path-converter/src/Converter.php',
-        'MatthiasMullie\\PathConverter\\ConverterInterface' => __DIR__ . '/..' . '/matthiasmullie/path-converter/src/ConverterInterface.php',
-        'MatthiasMullie\\PathConverter\\NoConverter' => __DIR__ . '/..' . '/matthiasmullie/path-converter/src/NoConverter.php',
         'Monolog\\ErrorHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/ErrorHandler.php',
         'Monolog\\Formatter\\ChromePHPFormatter' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Formatter/ChromePHPFormatter.php',
         'Monolog\\Formatter\\ElasticaFormatter' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Formatter/ElasticaFormatter.php',
@@ -832,7 +829,6 @@ class ComposerStaticInit1ae1f24a0195b90de4d5c22a1e5455dc
         'Twig_Cache_Null' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Cache/Null.php',
         'Twig_Compiler' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Compiler.php',
         'Twig_CompilerInterface' => __DIR__ . '/..' . '/twig/twig/lib/Twig/CompilerInterface.php',
-        'Twig_ContainerRuntimeLoader' => __DIR__ . '/..' . '/twig/twig/lib/Twig/ContainerRuntimeLoader.php',
         'Twig_Environment' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Environment.php',
         'Twig_Error' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Error.php',
         'Twig_Error_Loader' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Error/Loader.php',
@@ -852,7 +848,6 @@ class ComposerStaticInit1ae1f24a0195b90de4d5c22a1e5455dc
         'Twig_Extension_Sandbox' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Extension/Sandbox.php',
         'Twig_Extension_Staging' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Extension/Staging.php',
         'Twig_Extension_StringLoader' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Extension/StringLoader.php',
-        'Twig_FactoryRuntimeLoader' => __DIR__ . '/..' . '/twig/twig/lib/Twig/FactoryRuntimeLoader.php',
         'Twig_FileExtensionEscapingStrategy' => __DIR__ . '/..' . '/twig/twig/lib/Twig/FileExtensionEscapingStrategy.php',
         'Twig_Filter' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Filter.php',
         'Twig_FilterCallableInterface' => __DIR__ . '/..' . '/twig/twig/lib/Twig/FilterCallableInterface.php',
@@ -875,7 +870,6 @@ class ComposerStaticInit1ae1f24a0195b90de4d5c22a1e5455dc
         'Twig_Loader_String' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Loader/String.php',
         'Twig_Markup' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Markup.php',
         'Twig_Node' => __DIR__ . '/..' . '/twig/twig/lib/Twig/Node.php',
-        'Twig_NodeCaptureInterface' => __DIR__ . '/..' . '/twig/twig/lib/Twig/NodeCaptureInterface.php',
         'Twig_NodeInterface' => __DIR__ . '/..' . '/twig/twig/lib/Twig/NodeInterface.php',
         'Twig_NodeOutputInterface' => __DIR__ . '/..' . '/twig/twig/lib/Twig/NodeOutputInterface.php',
         'Twig_NodeTraverser' => __DIR__ . '/..' . '/twig/twig/lib/Twig/NodeTraverser.php',
@@ -1045,11 +1039,11 @@ class ComposerStaticInit1ae1f24a0195b90de4d5c22a1e5455dc
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit1ae1f24a0195b90de4d5c22a1e5455dc::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit1ae1f24a0195b90de4d5c22a1e5455dc::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInit1ae1f24a0195b90de4d5c22a1e5455dc::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit1ae1f24a0195b90de4d5c22a1e5455dc::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit1ae1f24a0195b90de4d5c22a1e5455dc::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitc8652957a277dc1464025db6ba78b7f0::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitc8652957a277dc1464025db6ba78b7f0::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInitc8652957a277dc1464025db6ba78b7f0::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitc8652957a277dc1464025db6ba78b7f0::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitc8652957a277dc1464025db6ba78b7f0::$classMap;
 
         }, null, ClassLoader::class);
     }

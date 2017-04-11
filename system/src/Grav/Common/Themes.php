@@ -311,23 +311,17 @@ class Themes extends Iterator
      */
     protected function autoloadTheme($class)
     {
+        /** @var UniformResourceLocator $locator */
+        $locator = $this->grav['locator'];
+
         $prefix = "Grav\\Theme";
         if (false !== strpos($class, $prefix)) {
             // Remove prefix from class
             $class = substr($class, strlen($prefix));
 
-            // Try Old style theme classes
-            $path = strtolower(ltrim(preg_replace('#\\\|_(?!.+\\\)#', '/', $class), '/'));
-            $file = $this->grav['locator']->findResource("themes://{$path}/{$path}.php");
-
-            // Load class
-            if (file_exists($file)) {
-                return include_once($file);
-            }
-
             // Replace namespace tokens to directory separators
-            $path = $this->grav['inflector']->hyphenize(ltrim($class,"\\"));
-            $file = $this->grav['locator']->findResource("themes://{$path}/{$path}.php");
+            $path = strtolower(ltrim(preg_replace('#\\\|_(?!.+\\\)#', '/', $class), '/'));
+            $file = $locator->findResource("themes://{$path}/{$path}.php");
 
             // Load class
             if (file_exists($file)) {

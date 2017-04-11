@@ -29,5 +29,5 @@ rewrite {
 
 # global rewrite should come last.
 rewrite {
-    to  {path} {path}/ /index.php?_url={uri}&{query}
+    to  {path} {path}/ /index.php?_url={uri}
 }

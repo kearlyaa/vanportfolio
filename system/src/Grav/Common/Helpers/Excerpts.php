@@ -9,7 +9,6 @@
 namespace Grav\Common\Helpers;
 
 use Grav\Common\Grav;
-use Grav\Common\Page\Page;
 use Grav\Common\Uri;
 use Grav\Common\Page\Medium\Medium;
 use RocketTheme\Toolbox\Event\Event;
@@ -20,11 +19,11 @@ class Excerpts
     /**
      * Process Grav image media URL from HTML tag
      *
-     * @param string $html         HTML tag e.g. `<img src="image.jpg" />`
-     * @param Page   $page         The current page object
-     * @return string              Returns final HTML string
+     * @param $html         HTML tag e.g. `<img src="image.jpg" />`
+     * @param $page         The current page object
+     * @return string       Returns final HTML string
      */
-    public static function processImageHtml($html, Page $page)
+    public static function processImageHtml($html, $page)
     {
         $excerpt = static::getExcerptFromHtml($html, 'img');
 
@@ -48,8 +47,8 @@ class Excerpts
     /**
      * Get an Excerpt array from a chunk of HTML
      *
-     * @param string $html         Chunk of HTML
-     * @param string $tag          A tag, for example `img`
+     * @param $html         Chunk of HTML
+     * @param $tag          a tag, for example `img`
      * @return array|null   returns nested array excerpt
      */
     public static function getExcerptFromHtml($html, $tag)
@@ -110,11 +109,11 @@ class Excerpts
      * Process a Link excerpt
      *
      * @param $excerpt
-     * @param Page $page
+     * @param $page
      * @param string $type
      * @return mixed
      */
-    public static function processLinkExcerpt($excerpt, Page $page, $type = 'link')
+    public static function processLinkExcerpt($excerpt, $page, $type = 'link')
     {
         $url = htmlspecialchars_decode(urldecode($excerpt['element']['attributes']['href']));
 
@@ -190,11 +189,11 @@ class Excerpts
     /**
      * Process an image excerpt
      *
-     * @param array $excerpt
-     * @param Page $page
+     * @param $excerpt
+     * @param $page
      * @return mixed
      */
-    public static function processImageExcerpt(array $excerpt, Page $page)
+    public static function processImageExcerpt($excerpt, $page)
     {
         $url = htmlspecialchars_decode(urldecode($excerpt['element']['attributes']['src']));
         $url_parts = static::parseUrl($url);
@@ -226,7 +225,6 @@ class Excerpts
                     $base_url = rtrim(Grav::instance()['base_url_relative'] . Grav::instance()['pages']->base(), '/');
                     $page_route = '/' . ltrim(str_replace($base_url, '', $folder), '/');
 
-                    /** @var Page $ext_page */
                     $ext_page = Grav::instance()['pages']->dispatch($page_route, true);
                     if ($ext_page) {
                         $media = $ext_page->media();

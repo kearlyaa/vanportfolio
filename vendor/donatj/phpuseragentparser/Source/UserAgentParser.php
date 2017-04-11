@@ -7,7 +7,7 @@
  * @link https://github.com/donatj/PhpUserAgent
  * @link http://donatstudios.com/PHP-Parser-HTTP_USER_AGENT
  * @param string|null $u_agent User agent string to parse or null. Uses $_SERVER['HTTP_USER_AGENT'] on NULL
- * @throws \InvalidArgumentException on not having a proper user agent to parse.
+ * @throws InvalidArgumentException on not having a proper user agent to parse.
  * @return string[] an array with browser, version and platform keys
  */
 function parse_user_agent( $u_agent = null ) {
@@ -52,8 +52,8 @@ function parse_user_agent( $u_agent = null ) {
 		$platform = 'Chrome OS';
 	}
 
-	preg_match_all('%(?P<browser>Camino|Kindle(\ Fire)?|Firefox|Iceweasel|IceCat|Safari|MSIE|Trident|AppleWebKit|
-				TizenBrowser|Chrome|Vivaldi|IEMobile|Opera|OPR|Silk|Midori|Edge|CriOS|UCBrowser|Puffin|SamsungBrowser|
+	preg_match_all('%(?P<browser>Camino|Kindle(\ Fire)?|Firefox|Iceweasel|Safari|MSIE|Trident|AppleWebKit|TizenBrowser|Chrome|
+				Vivaldi|IEMobile|Opera|OPR|Silk|Midori|Edge|CriOS|UCBrowser|
 				Baiduspider|Googlebot|YandexBot|bingbot|Lynx|Version|Wget|curl|
 				Valve\ Steam\ Tenfoot|
 				NintendoBrowser|PLAYSTATION\ (\d|Vita)+)
@@ -97,7 +97,7 @@ function parse_user_agent( $u_agent = null ) {
 
 	$key = 0;
 	$val = '';
-	if( $browser == 'Iceweasel' || strtolower($browser) == 'icecat' ) {
+	if( $browser == 'Iceweasel' ) {
 		$browser = 'Firefox';
 	} elseif( $find('Playstation Vita', $key) ) {
 		$platform = 'PlayStation Vita';
@@ -120,24 +120,11 @@ function parse_user_agent( $u_agent = null ) {
 	} elseif( $find('Opera', $key, $browser) ) {
 		$find('Version', $key);
 		$version = $result['version'][$key];
-	} elseif( $find('Puffin', $key, $browser) ) {
+	} elseif( $find(array( 'IEMobile', 'Edge', 'Midori', 'Vivaldi', 'Valve Steam Tenfoot', 'Chrome' ), $key, $browser) ) {
 		$version = $result['version'][$key];
-		if( strlen($version) > 3 ) {
-			$part = substr($version, -2);
-			if( ctype_upper($part) ) {
-				$version = substr($version, 0, -2);
-
-				$flags = array( 'IP' => 'iPhone', 'IT' => 'iPad', 'AP' => 'Android', 'AT' => 'Android', 'WP' => 'Windows Phone', 'WT' => 'Windows' );
-				if( isset($flags[$part]) ) {
-					$platform = $flags[$part];
-				}
-			}
-		}
-	} elseif( $find(array( 'IEMobile', 'Edge', 'Midori', 'Vivaldi', 'SamsungBrowser', 'Valve Steam Tenfoot', 'Chrome' ), $key, $browser) ) {
-		$version = $result['version'][$key];
-	} elseif( $rv_result && $find('Trident', $key) ) {
+	} elseif( $browser == 'MSIE' || ($rv_result && $find('Trident', $key)) ) {
 		$browser = 'MSIE';
-		$version = $rv_result;
+		$version = $rv_result ?: $result['version'][$key];
 	} elseif( $find('UCBrowser', $key) ) {
 		$browser = 'UC Browser';
 		$version = $result['version'][$key];
