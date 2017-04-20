@@ -7,7 +7,8 @@ taxonomy:
 routable: false
 ---
 
-##Valve Software Bellevue, WA
+##Valve Software 
+####Bellevue, WA
 *Contractor – Steam Support July 2010 – July 2011*
 * Provided customer service and technical support to Steam users via email. Steam is the leading online platform for
 selling and distributing video games with over 30 million registered customers worldwide.
