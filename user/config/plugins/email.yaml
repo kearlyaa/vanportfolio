@@ -1,0 +1,14 @@
+enabled: true
+from: vanlang.pham@gmail.com
+from_name: Van Lang Pham
+to: vanlang.pham@gmail.com
+mailer:
+  engine: mail
+  smtp:
+    server: localhost
+    port: 25
+    encryption: none
+  sendmail:
+    bin: /usr/sbin/sendmail
+content_type: text/html
+debug: false
