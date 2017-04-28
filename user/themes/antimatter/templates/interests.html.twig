@@ -1,0 +1,37 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+
+
+
+<div class="nav_square">
+	<div class="dark_overlay"></div>
+	<a class="nav_square_link" href="{{ base_url }}/interests/media">
+		<h2>Media</h2>
+		<img class="nav_square_img" src="{{ url('theme://images/little_dog.jpg') }}" />
+	</a>
+</div>
+
+<div class="nav_square">
+	<div class="dark_overlay"></div>
+	<a class="nav_square_link" href="{{ base_url }}/interests/photos">
+		<h2>Photos</h2>
+		<img class="nav_square_img" src="{{ url('theme://images/stormtrooper.jpg') }}" />
+	</a>
+</div>
+
+<div class="nav_square">
+	<div class="dark_overlay"></div>
+	<a class="nav_square_link" href="{{ base_url }}/interests/videos">
+		<h2>Videos</h2>
+		<img class="nav_square_img" src="{{ url('theme://images/video.jpg') }}" />
+	</a>
+</div>
+
+<div class="clear"></div>
+
+	{{ page.content }}
+	
+{% endblock %}
+
+
