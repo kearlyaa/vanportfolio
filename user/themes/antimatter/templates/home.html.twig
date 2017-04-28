@@ -1,95 +1,60 @@
 {% extends 'partials/base.html.twig' %}
 
 {% block content %}
-	<div id="container">
 
 
-		<div class="nav_square">
-			<div class="dark_overlay"></div>
-			<a class="nav_square_link" href="{{ base_url }}/about">
-				<h2>About</h2>
-				<img class="nav_square_img" src="images/lost_brothers.jpg" />
-			</a>
-		</div>
 
-		<div class="nav_square">
-			<div class="dark_overlay"></div>
-			<a class="nav_square_link" href="{{ base_url }}/blog">
-				<h2>Blog</h2>
-				<img class="nav_square_img" src="images/stadium_selfie.jpg" />
-			</a>
-		</div>
+<div class="nav_square">
+	<div class="dark_overlay"></div>
+	<a class="nav_square_link" href="{{ base_url }}/about">
+		<h2>About</h2>
+		<img class="nav_square_img" src="{{ url('theme://images/lost_brothers.jpg') }}" />
+	</a>
+</div>
 
-		<div class="nav_square">
-			<div class="dark_overlay"></div>
-			<a class="nav_square_link" href="{{ base_url }}/resume">
-				<h2>Resume</h2>
-				<img class="nav_square_img" src="images/stained_glass_windows.jpg" />
-			</a>
-		</div>
+<div class="nav_square">
+	<div class="dark_overlay"></div>
+	<a class="nav_square_link" href="{{ base_url }}/blog">
+		<h2>Blog</h2>
+		<img class="nav_square_img" src="{{ url('theme://images/stadium_selfie.jpg') }}" />
+	</a>
+</div>
 
-		<div class="nav_square">
-			<div class="dark_overlay"></div>
-			<a class="nav_square_link" href="{{ base_url }}/arts">
-				<h2>Arts</h2>
-				<img class="nav_square_img" src="images/steak_frites.jpg" />
-			</a>
-		</div>
+<div class="nav_square">
+	<div class="dark_overlay"></div>
+	<a class="nav_square_link" href="{{ base_url }}/resume">
+		<h2>Resume</h2>
+		<img class="nav_square_img" src="{{ url('theme://images/stained_glass_windows.jpg') }}" />
+	</a>
+</div>
 
-		<div class="nav_square">
-			<div class="dark_overlay"></div>
-			<a class="nav_square_link" href="{{ base_url }}/interests">
-				<h2>Interests</h2>
-				<img class="nav_square_img" src="images/steak_frites.jpg" />
-			</a>
-		</div>
+<div class="nav_square">
+	<div class="dark_overlay"></div>
+	<a class="nav_square_link" href="{{ base_url }}/arts">
+		<h2>Arts</h2>
+		<img class="nav_square_img" src="{{ url('theme://images/steak_frites.jpg') }}" />
+	</a>
+</div>
 
-		<div class="nav_square">
-			<div class="dark_overlay"></div>
-			<a class="nav_square_link" href="{{ base_url }}/contact">
-				<h2>Contact</h2>
-				<img class="nav_square_img" src="images/stained_glass_flower.jpg" />
-			</a>
-		</div>
+<div class="nav_square">
+	<div class="dark_overlay"></div>
+	<a class="nav_square_link" href="{{ base_url }}/interests">
+		<h2>Interests</h2>
+		<img class="nav_square_img" src="{{ url('theme://images/steak_frites.jpg') }}" />
+	</a>
+</div>
 
-		
-		<div class="clear"></div>
-
-		<style>
-			
-			/** TODO: create breakpoints for mobile homepage, images should stack when width is too short **/
-			@media (max-width:630px){
-		    .nav_square{
-		      width: 100%;
-				}
-			}
-
-			@media (min-width: 630px){
-				.dark_overlay{
-					background: url("images/black.png") repeat;
-					opacity: 1;
-					height: 100%;
-					width: 100%;
-					position: absolute;
-					top: 0;
-					left: 0;
-					z-index: 100;
-					transition: opacity .5s ease-in-out;
-				   -moz-transition: opacity .5s ease-in-out;
-				   -webkit-transition: opacity .5s ease-in-out;
-					/*align-items: stretch;*/
-				}
+<div class="nav_square">
+	<div class="dark_overlay"></div>
+	<a class="nav_square_link" href="{{ base_url }}/contact">
+		<h2>Contact</h2>
+		<img class="nav_square_img" src="{{ url('theme://images/stained_glass_flower.jpg') }}" />
+	</a>
+</div>
 
 
-				.dark_overlay:hover{			
-				   opacity: 0;
-				}
-			}
+<div class="clear"></div>
 
-
-		</style>
-
-	</div>
 	{{ page.content }}
 	
 {% endblock %}

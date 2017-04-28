@@ -50,6 +50,35 @@ a.nav_square_link{
 	position: relative;
 }
 
+/** TODO: create breakpoints for mobile homepage, images should stack when width is too short **/
+@media (max-width:630px){
+  .nav_square{
+    width: 100%;
+	}
+}
+
+@media (min-width: 630px){
+	.dark_overlay{
+		background: url(../images/black.png) repeat;
+		opacity: .5;
+		height: 100%;
+		width: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 100;
+		transition: opacity .5s ease-in-out;
+	   -moz-transition: opacity .5s ease-in-out;
+	   -webkit-transition: opacity .5s ease-in-out;
+	}
+
+
+	.dark_overlay:hover{			
+	   opacity: 0;
+	}
+}
+
+
 /* Resume Page */
 
 .job_tile img{
