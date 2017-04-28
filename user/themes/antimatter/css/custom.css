@@ -50,6 +50,7 @@ a.nav_square_link{
 	position: relative;
 }
 
+
 /** TODO: create breakpoints for mobile homepage, images should stack when width is too short **/
 @media (max-width:630px){
   .nav_square{
@@ -72,9 +73,12 @@ a.nav_square_link{
 	   -webkit-transition: opacity .5s ease-in-out;
 	}
 
-
 	.dark_overlay:hover{			
 	   opacity: 0;
+	}
+
+	.featherlight .featherlight-content{
+		max-width: 65%;
 	}
 }
 
