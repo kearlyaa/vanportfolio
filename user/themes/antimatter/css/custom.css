@@ -16,6 +16,15 @@ a:hover{
 	width: 95%;
 	margin: 0 auto;
 	padding-bottom: 35px;
+	padding-top: 150px;
+}
+
+#header{
+	background: #ffffff;
+}
+
+body{
+	z-index: 1;
 }
 
 span.center{display:block;}
@@ -52,6 +61,18 @@ a.nav_square_link{
 	position: relative;
 	overflow: hidden;
 }
+
+/* About Page */
+.about_bg{
+	/*background: url(../images/about_bg_header_image.png) no-repeat top center;*/
+	min-height: 100%;
+	width: 100%;
+	width: 1200px;
+	position: absolute;
+	top: 80px;
+	z-index: 0;
+}
+
 
 
 /** TODO: create breakpoints for mobile homepage, images should stack when width is too short **/

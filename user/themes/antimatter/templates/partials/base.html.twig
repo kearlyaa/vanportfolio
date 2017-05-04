@@ -73,6 +73,11 @@
 
         {% block body %}
         <section id="body" class="{{ class }}">
+            {% if home() == false and page.header.bg_url|e %}
+                <div class="about_bg">
+                    <img src="{{ page.permalink() }}/{{ page.header.bg_url }}" /> 
+                </div>
+            {% endif %}
             <div id="container">
                 {% block content %}{% endblock %}
             </div>
