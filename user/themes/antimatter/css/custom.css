@@ -62,6 +62,17 @@ a.nav_square_link{
 	overflow: hidden;
 }
 
+div#container.wide_view{
+	max-width: 100% !important;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+div#container.wide_view .nav_square{
+	height: 300px;
+}
+
 /* About Page */
 .about_bg{
 	/*background: url(../images/about_bg_header_image.png) no-repeat top center;*/
