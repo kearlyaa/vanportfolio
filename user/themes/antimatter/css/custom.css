@@ -16,7 +16,7 @@ a:hover{
 	width: 95%;
 	margin: 0 auto;
 	padding-bottom: 35px;
-	padding-top: 200px;
+	padding-top: 50px;
 }
 
 #header{
@@ -28,10 +28,12 @@ body{
 	color: #222222;
 }
 
-span.center{display:block;}
+span.center{
+	display:block;
+}
 
-.short_padding{
-	padding-top: 100px !important;
+#container.container_padding_plus{
+	padding-top: 200px !important;
 }
 
 /* Home Page */
