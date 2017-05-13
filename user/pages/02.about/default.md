@@ -3,8 +3,12 @@ title: About
 bg_url: about_bg_header_image.png
 ---
 
-Slow-carb copper mug jean shorts, gentrify intelligentsia wayfarers pok pok truffaut VHS. Banjo narwhal coloring book, chambray typewriter skateboard organic venmo. Poke schlitz green juice occupy, crucifix succulents man braid snackwave twee. Blog iPhone echo park, mixtape pour-over seitan tumblr mustache af poke banjo pop-up. Farm-to-table photo booth man bun lumbersexual unicorn, aesthetic actually wolf. Sriracha vape man braid hot chicken semiotics. Blue bottle paleo polaroid before they sold out.
+Van was born in the town of Missoula in the Rocky Mountains of Montana. His parents Tuyen Pham and Shang Lin (Shu Shu), are Vietnamese immigrants that fled native lands after the war.
 
-Keytar sartorial pug, YOLO locavore kale chips kogi. Affogato tbh godard, direct trade roof party woke sriracha lomo intelligentsia synth salvia readymade umami bushwick. Kitsch pinterest affogato blog cornhole tacos, before they sold out YOLO authentic messenger bag direct trade semiotics jean shorts godard activated charcoal. Echo park woke single-origin coffee, wolf beard pickled pour-over semiotics vice hashtag neutra photo booth. Hell of blue bottle skateboard, schlitz deep v activated charcoal fap PBR&B tumblr. Gluten-free sustainable trust fund blue bottle, artisan pour-over try-hard. Pabst chartreuse narwhal sriracha, ethical crucifix poutine pitchfork bushwick pork belly.
+A child of 80s, he grew on the soccer field following the successful youth club careers of this two brothers Tri and Tung and eventually went on have his own career in the Montana Youth Soccer Association system.
 
-Pabst everyday carry franzen, lomo small batch kinfolk authentic gluten-free raclette venmo skateboard flexitarian iceland retro messenger bag. Tumeric fingerstache chambray, banjo 90's tilde umami butcher portland man bun. Biodiesel tilde put a bird on it locavore VHS master cleanse. Hot chicken aesthetic woke, before they sold out umami YOLO 90's coloring book live-edge fashion axe heirloom slow-carb polaroid mixtape shoreditch. Selvage knausgaard four loko cliche. Flannel cred bicycle rights messenger bag, austin direct trade man bun hashtag pop-up forage. Ethical swag photo booth, hexagon 3 wolf moon vinyl occupy venmo slow-carb franzen cold-pressed letterpress gastropub raclette whatever.
+He lived a modest childhood as he progressed through the Missoula Public School System, first to Mount Jumbo Elementary, then to Rattlesnake Middle School and then finally spent four years as Knight of Hellgate High School.
+
+After Hellgate, Van made his way west to Tacoma, WA in the Pacific Northwest and enrolled at the University of Puget Sound. There he studied Music and Communications and had the pleasure of spending his senior year serving as President of the Associated Students of UPS.
+
+Once his time in Tacoma he moved up to Seattle and began some professional work in the fields of Advertising and Marketing.

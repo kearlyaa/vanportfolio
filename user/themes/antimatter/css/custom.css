@@ -16,7 +16,7 @@ a:hover{
 	width: 95%;
 	margin: 0 auto;
 	padding-bottom: 35px;
-	padding-top: 150px;
+	padding-top: 200px;
 }
 
 #header{
@@ -25,6 +25,7 @@ a:hover{
 
 body{
 	z-index: 1;
+	color: #222222;
 }
 
 span.center{display:block;}
