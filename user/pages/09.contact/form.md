@@ -1,5 +1,6 @@
 ---
 title: Contact
+bg_url: water_header.png
 form:
     name: my-nice-form
     fields:
@@ -52,4 +53,9 @@ form:
             display: thankyou
 ---
 
-Contact me on [facebook](https://www.facebook.com/vanlang.pham) or [linkedin](https://www.linkedin.com/in/vanlangpham).
+You may contact me on
+
+[facebook](https://www.facebook.com/vanlang.pham)  
+[linkedin](https://www.linkedin.com/in/vanlangpham)
+
+Or using the form below:

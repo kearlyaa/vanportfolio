@@ -1,6 +1,7 @@
 ---
 title: 'My Music'
 visible: true
+bg_url: orchestra_header.png
 ---
 
 Currently, Van is involved with a handful of musical groups and continues to find ways to be involved.
