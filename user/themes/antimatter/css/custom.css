@@ -89,6 +89,8 @@ div#container.wide_view .nav_square{
 	position: absolute;
 	top: 80px;
 	z-index: 0;
+	left: 50%;
+	margin-left: -600px;
 }
 
 .about_bg img{
