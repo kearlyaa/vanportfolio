@@ -73,6 +73,7 @@
 
         {% block body %}
         <section id="body" class="{{ class }}">
+            
             {% if page.home() == false and page.header.bg_url|e %}
                 <div class="about_bg">
                     <img src="{{ page.permalink() }}/{{ page.header.bg_url }}" /> 
@@ -86,6 +87,13 @@
                     });        
                 </script>
             {% endif %}
+            {% if page.name == 'arts.md' or page.name == 'interests.md' %}
+                <script>
+                    $(document).ready(function(){
+                         $('#container').addClass('short_padding');
+                    });        
+                </script>
+            {% endif %}    
             <div id="container">
                 {% block content %}{% endblock %}
             </div>

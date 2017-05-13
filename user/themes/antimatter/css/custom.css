@@ -30,6 +30,10 @@ body{
 
 span.center{display:block;}
 
+.short_padding{
+	padding-top: 100px !important;
+}
+
 /* Home Page */
 
 .nav_square_link h2{
