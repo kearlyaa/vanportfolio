@@ -77,7 +77,11 @@ div#container.wide_view{
 }
 
 div#container.wide_view .nav_square{
-	height: 300px;
+	height: 225px;
+}
+
+.nav_square img{
+	object-fit: cover;
 }
 
 /* About Page */
@@ -120,6 +124,12 @@ div#container.wide_view .nav_square{
 		transition: opacity .5s ease-in-out;
 	   -moz-transition: opacity .5s ease-in-out;
 	   -webkit-transition: opacity .5s ease-in-out;
+	}
+
+	@media (max-width: 1200px){
+		div#container.wide_view .nav_square{
+			height: 150px;
+		}
 	}
 
 	.dark_overlay:hover{			
