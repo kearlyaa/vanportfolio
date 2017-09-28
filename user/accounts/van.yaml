@@ -9,3 +9,6 @@ fullname: Van
 title: 'The Boss'
 state: enabled
 hashed_password: $2y$10$iLSMHeH5QN.SL8liAh6WxO8Ss0k.u.5K81m7HHkI871b.P7Wvo5w.
+language: en
+login_attempts: {  }
+twofa_secret: 2Z35FMAIE63XKTOXRWUVGGBUT4DBBL5O
